@@ -1,0 +1,44 @@
+<nav class="cars-nav">
+  <input
+    class="cars-nav__name"
+    #carsModel
+    type="text"
+    placeholder="Search car...">
+
+  <button mat-button (click)="seeList()">
+    <mat-icon>shopping_cart</mat-icon>
+
+  </button>
+
+</nav>
+<mat-toolbar-row class="cars" *ngIf="carsList.length">
+  <div class="cars__list">
+    <mat-list>
+      <div class="cars__list__header" matSubheader>all cars</div>
+      <mat-list-item *ngFor="let car of carsList" class="cars__list__item">
+        <mat-icon mat-list-icon>fiber_manual_record</mat-icon>
+        <div><p>{{car.Make_Name + ' - ' + car.Model_Name}}</p></div>
+        <div><b>{{car.Model_ID + '$'}}</b></div>
+        <button style="background: #E0DDAA; color: black" mat-mini-fab (click)="addCarToCart(car)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="cars__stored">
+    <mat-list>
+      <div class="cars__list__header" matSubheader>stored cars</div>
+      <mat-list-item *ngFor="let car of carsStore; index as i" class="cars__stored__item">
+        <mat-icon mat-list-icon>checked</mat-icon>
+        <div><p>{{car.Model_Name}}</p></div>
+        <div class="price"><b>{{car.Model_ID + '$'}}</b></div>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+    <div class="total">
+      <p>{{'total ' + totalPrice + ' $'}}</p>
+      <button (click)="clear()" mat-button>clear</button>
+      <button (click)="pay(totalPrice)" mat-button>buy</button>
+    </div>
+  </div>
+</mat-toolbar-row>
